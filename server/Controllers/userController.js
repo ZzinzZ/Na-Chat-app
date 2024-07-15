@@ -94,4 +94,5 @@ const findAllUsers = async (req, res) => {
     res.status(500).json("Server error!");
   }
 };
+
 module.exports = { registerUser, loginUser, findUser, findAllUsers };

@@ -4,16 +4,33 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import LoadingBox from "../components/LoadingBox";
 import cloudinaryUpload from "../utils/uploads";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
+
 const Login = () => {
-
-
   const {isLoading,loginInfo,updateLoginInfo, loginUser,loginError} = useContext(AuthContext);
+
+  const [file, setFile] = useState(null);
+
+  const handleUpload = () => {
+    const formData = new FormData();
+    formData.append("file", file);
+    axios.post("http://localhost:8000/api/v1/images/upload", formData)
+      .then(res => {
+
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+
+
+
   return (
     <>
-      <Form onSubmit={loginUser}>
+      {/* <Form onSubmit={loginUser}>
         <Row style={{
             height: '100vh',
             justifyContent: 'center',
@@ -45,7 +62,11 @@ const Login = () => {
             </Stack>
           </Col>
         </Row>
-      </Form>
+      </Form> */}
+      <div >
+        <input type="file" name="" id="" onChange={(e) => setFile(e.target.files[0]) } />
+        <button onClick={handleUpload}>Upload</button>
+    </div>
     </>
   );
   
